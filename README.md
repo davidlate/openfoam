@@ -1,2 +1,2 @@
 # openfoam
-This is a respository of my OpenFOAM CFD projects
+This is a repository of my OpenFOAM CFD projects

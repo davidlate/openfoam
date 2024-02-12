@@ -34,7 +34,7 @@ boundaryField
     wall1
     {
         type            kqRWallFunction;
-    //    value           uniform 0.375;
+        value           uniform 0.375;
     }
 }
 //     lowerWall

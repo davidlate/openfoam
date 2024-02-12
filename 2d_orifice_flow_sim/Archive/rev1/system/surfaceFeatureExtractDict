@@ -1,0 +1,58 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  whatever you use                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      surfaceFeatureExtractDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// fluid_body.stl
+// {
+//     extractionMethod    extractFromSurface;
+//     extractFromSurfaceCoeffs
+//     {
+//         includedAngle   170;  // Angle for feature edge detection
+//     }
+//     writeObj            yes;  // Write .obj files for visualization
+// }
+
+
+inlet.stl
+{
+    extractionMethod    extractFromSurface;
+    extractFromSurfaceCoeffs
+    {
+        includedAngle   170;  // Angle for feature edge detection
+    }
+    writeObj            yes;  // Write .obj files for visualization
+}
+
+outlet.stl
+{
+    extractionMethod    extractFromSurface;
+    extractFromSurfaceCoeffs
+    {
+        includedAngle   170;
+    }
+    writeObj            yes;
+}
+
+wall.stl
+{
+    extractionMethod    extractFromSurface;
+    extractFromSurfaceCoeffs
+    {
+        includedAngle   170;
+    }
+    writeObj            yes;
+}
+
+// ************************************************************************* //

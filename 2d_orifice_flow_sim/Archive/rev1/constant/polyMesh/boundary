@@ -21,32 +21,32 @@ FoamFile
     outlet
     {
         type            patch;
-        nFaces          33;
-        startFace       9543;
+        nFaces          35;
+        startFace       22963;
     }
     inlet
     {
         type            patch;
-        nFaces          33;
-        startFace       9576;
+        nFaces          35;
+        startFace       22998;
     }
     wall1
     {
         type            wall;
-        nFaces          260;
-        startFace       9609;
+        nFaces          516;
+        startFace       23033;
     }
     source_face
     {
         type            empty;
-        nFaces          5604;
-        startFace       9869;
+        nFaces          14644;
+        startFace       23549;
     }
     destination_face
     {
         type            empty;
-        nFaces          5604;
-        startFace       15473;
+        nFaces          14644;
+        startFace       38193;
     }
 )
 

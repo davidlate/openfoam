@@ -1,0 +1,196 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:                       |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+castellatedMesh true;
+snap            true;
+addLayers       false;
+
+geometry
+{
+
+
+    inlet.stl
+    {
+        type triSurfaceMesh;
+        name inlet;
+        regions
+        {
+        }
+    }
+
+    outlet.stl
+    {
+        type triSurfaceMesh;
+        name outlet;
+        regions
+        {
+        }
+    }
+
+    wall.stl
+    {
+        type triSurfaceMesh;
+        name wall1;
+        regions
+        {
+        }
+    }
+};
+
+castellatedMeshControls
+{
+    maxLocalCells 1000000;
+    maxGlobalCells 2000000;
+    minRefinementCells 30;
+    maxLoadUnbalance 0.10;
+    nCellsBetweenLevels 3;
+
+    features
+    (
+    
+        { file "inlet.eMesh"; level 1; }
+        { file "outlet.eMesh"; level 1; }
+        { file "wall.eMesh"; level 1; }
+    );
+
+    refinementSurfaces
+    {
+        inlet { level (1 2); }
+        outlet { level (1 2); }
+        wall1 { level (1 2); }
+    }
+
+    resolveFeatureAngle 5;
+
+    refinementRegions
+    {
+        // Add refinement regions here if needed
+    }
+
+    locationInMesh (10 1 1);
+    allowFreeStandingZoneFaces false;
+}
+
+snapControls
+{
+    nSmoothPatch 3;
+    nSmoothInternal 3;
+    tolerance 1.0;
+    nSolveIter 30;
+    nRelaxIter 5;
+    //- Number of feature edge snapping iterations.
+       //  Leave out altogether to disable.
+       nFeatureSnapIter 30; //10;
+
+       //- Detect (geometric only) features by sampling the surface
+       //  (default=false).
+       implicitFeatureSnap false;
+
+       //- Use castellatedMeshControls::features (default = true)
+       explicitFeatureSnap true;
+
+       //- Detect points on multiple surfaces (only for explicitFeatureSnap)
+       multiRegionFeatureSnap false;
+}
+
+
+addLayersControls
+
+{
+
+    relativeSizes true;
+
+    layers
+
+    {
+
+        mysuplat
+
+        {
+
+            nSurfaceLayers 3;
+
+        }
+
+    }
+
+    expansionRatio 1.1;
+
+    finalLayerThickness 0.7;
+
+    minThickness 0.1;
+
+    nGrow 1;
+
+    // Advanced settings
+
+    featureAngle 110;
+
+    nRelaxIter 3;
+
+    nSmoothSurfaceNormals 1;
+
+    nSmoothNormals 3;
+
+    nSmoothThickness 10;
+
+    maxFaceThicknessRatio 0.9;
+
+    maxThicknessToMedialRatio 0.9;
+
+    minMedianAxisAngle 130;
+
+    nBufferCellsNoExtrude 0;
+
+    nLayerIter 50;
+
+}
+
+
+meshQualityControls
+{
+    maxNonOrtho 65;            // Max non-orthogonal angle for mesh faces
+    maxBoundarySkewness 20;    // Max skewness for boundary faces
+    maxInternalSkewness 4;     // Max skewness for internal faces
+    maxConcave 80;             // Max concave angle
+    minFlatness 0.5;           // Min flatness of cells
+    minVol 1e-13;              // Min volume of cells
+    minTetQuality 1e-30;       // Min quality of tetrahedral cells
+    minVolCollapseRatio -1;
+    minArea -1;                // Min face area; negative value disables check
+    minTwist 0.02;             // Min twist of cell face normals
+    minDeterminant .001;
+    minFaceWeight 0.05;        // Max face interpolation weight deviation
+    minFaceFlatness -1;
+    minVolRatio 0.5;           // Max volume ratio of cell to neighbouring cell
+    minTriangleTwist -1;
+    nSmoothScale 4;
+    errorReduction .75;
+    minMedianAxisAngle 130;    // Min median axis angle for face deformation
+    minFeatureAngle 30;        // Min angle for feature detection
+    minNonOrtho 0.1;           // Min non-orthogonality allowed
+}
+
+writeFlags
+(
+    scalarLevels
+    layerSets
+    layerFields
+);
+
+mergeTolerance 1E-6;
+
+// ************************************************************************* //

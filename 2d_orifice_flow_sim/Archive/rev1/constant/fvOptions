@@ -9,45 +9,20 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
-    object      k;
+    class       dictionary;
+    object      fvOptions;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 2 -2 0 0 0 0];
-
-internalField   uniform .375;
-
-boundaryField
+limitT
 {
-    inlet
-    {
-        type            fixedValue; 
-        value           uniform .375;
-    }
+    type            limitTemperature;
+    active          yes;
 
-    outlet
-    {
-        type            zeroGradient;
-    }
-
-    wall1
-    {
-        type            kqRWallFunction;
-    //    value           uniform 0.375;
-    }
+    selectionMode   all;
+    min             3;
+    max             5000000;
+    //phase           gas; // optional
 }
-//     lowerWall
-//     {
-//         type            kqRWallFunction;
-//         value           uniform 0.375;
-//     }
-
-//     frontAndBack
-//     {
-//         type            empty;
-//     }
-// }
-
 
 // ************************************************************************* //

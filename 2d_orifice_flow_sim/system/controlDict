@@ -16,19 +16,19 @@ FoamFile
 
 application     rhoPimpleFoam;
 
-startFrom       startTime;    
+startFrom       latestTime;     //startTime
 
 startTime       0;
 
 stopAt          endTime;
 
-endTime         2;
+endTime         0.5;
 
-deltaT          .0001;
+deltaT          1e-6;
 
 writeControl    adjustable;
 
-writeInterval   .0001;      //Timestep is # of timesteps, adjustable is number of seconds in simulation time
+writeInterval   1e-6;      //Timestep is # of timesteps, adjustable is number of seconds in simulation time
 
 purgeWrite      0;
 
@@ -46,7 +46,7 @@ runTimeModifiable yes;
 
 adjustTimeStep  yes;
 
-maxCo           .95; //Try increasing this
+maxCo           .9; 
 
 
 // ************************************************************************* //
